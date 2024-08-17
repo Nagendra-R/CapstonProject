@@ -1,6 +1,7 @@
 package com.automation.steps;
 
 import com.automation.pages.HomePage;
+import com.automation.utils.ReportManager;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -35,4 +36,29 @@ public class HomeStep {
         homePage.clickOnContinueButton();
 
     }
+
+    @Then("verify the error message is shown below")
+    public void verifyTheErrorMessageIsShownBelow(String errMessage) {
+        Assert.assertTrue(homePage.verifyErrorMessage(errMessage));
+        ReportManager.log("Invalid Phone Number");
+        ReportManager.attachScreenshot();
+    }
+
+    @When("user click on the visit ajioluxe tab")
+    public void userClickOnTheVisitAjioluxeTab() {
+        homePage.clickOnAJioluxe();
+    }
+
+    @Then("verify user on ajioluxe page")
+    public void verifyUserOnAjioluxePage() {
+        Assert.assertEquals("https://luxe.ajio.com/",homePage.verifyUserOnAjioLuxePage());
+    }
+
+
+    @When("user search with {string}")
+    public void userSearchWith(String item) {
+        homePage.searchWithItem(item);
+    }
+
+
 }
