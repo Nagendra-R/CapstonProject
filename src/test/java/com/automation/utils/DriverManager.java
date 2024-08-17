@@ -12,10 +12,10 @@ public class DriverManager {
     public static void createDriver(){
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(6));
     }
 
     public static WebDriver getDriver() {
-        return driver;
+        return DriverManager.driver;
     }
 }
