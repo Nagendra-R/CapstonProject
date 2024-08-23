@@ -1,6 +1,7 @@
 package com.automation.steps;
 
 import com.automation.pages.CartPage;
+import com.automation.utils.ConfigReader;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -15,7 +16,7 @@ public class CartPageSteps {
     public void select_a_size_for_the_product() {
 
         cartPage.tabSwitch();
-        cartPage.sizeSelection();
+        cartPage.sizeSelection(ConfigReader.getConfigValue("product.size"));
 
     }
     @Then("add the product to the cart")
@@ -59,4 +60,17 @@ public class CartPageSteps {
     }
 
 
+//------------------------------ quantity changing  -----------------------------------------
+
+    @When("user is on the cart page change the quantity of the product")
+    public void userIsOnTheCartPageChangeTheQuantityOfTheProduct() {
+
+
+    }
+
+    @Then("verify the price is changed based on quantity")
+    public void verifyThePriceIsChangedBasedOnQuantity() {
+
+
+    }
 }

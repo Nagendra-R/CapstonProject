@@ -14,8 +14,7 @@ public class CartPage extends BasePage {
 
     List<String> windowHandles = new ArrayList<>(driver.getWindowHandles());
 
-    @FindBy(xpath = "//div[@tabindex='0']/span[text()='7']")
-    WebElement sizeBtn;
+    String sizeXpath = "//div[@tabindex='0']/span[text()='%s']";
 
     @FindBy(xpath = "//span[text()='ADD TO BAG']")
     WebElement addToCartBtn;
@@ -39,8 +38,9 @@ public class CartPage extends BasePage {
         driver.switchTo().window(windowHandles.getLast());
     }
 
-    public void sizeSelection() {
-        sizeBtn.click();
+    public void sizeSelection(String size) {
+        String sizeStr = String.format(sizeXpath, size);
+        driver.findElement(By.xpath(sizeStr)).click();
     }
 
     public void addToCart() {
@@ -101,5 +101,17 @@ public class CartPage extends BasePage {
         return cartVerify = emptyCartText.isDisplayed();
 
     }
+
+
+//------------------ quantity changing --------------------------------------------------
+
+    @FindBy(xpath = "//div[@class='cartqty']")
+    WebElement quantityChangeBtn;
+
+    @FindBy(xpath = "//button[@class='increment button']")
+    WebElement incrementBtn;
+
+    @FindBy(id = "updateQuantity")
+    WebElement quantityUpdateBtn;
 
 }
