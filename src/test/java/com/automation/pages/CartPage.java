@@ -12,6 +12,8 @@ import java.util.List;
 
 public class CartPage extends BasePage {
 
+    @FindBy(xpath = "//div[@class='ic-cart ']")
+    WebElement cartIconButton;
     List<String> windowHandles = new ArrayList<>(driver.getWindowHandles());
 
     String sizeXpath = "//div[@tabindex='0']/span[text()='%s']";
@@ -38,15 +40,23 @@ public class CartPage extends BasePage {
         driver.switchTo().window(windowHandles.getLast());
     }
 
+    @FindBy(xpath = "//button[text()='Proceed to shipping']")
+    WebElement proceedToShippingButton;
     public void sizeSelection(String size) {
         String sizeStr = String.format(sizeXpath, size);
         driver.findElement(By.xpath(sizeStr)).click();
     }
 
+    @FindBy(id = "error-tooltip")
+    WebElement textInEmptyCartPage;
     public void addToCart() {
         addToCartBtn.click();
     }
 
+    public boolean verifyItemAddedToBag() {
+        clickElementByJS(cartIconButton);
+        return proceedToShippingButton.isDisplayed();
+    }
     public void goToCart() {
         WebElement goToCartBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='GO TO BAG']")));
         goToCartBtn.click();
@@ -63,6 +73,7 @@ public class CartPage extends BasePage {
         String couponPriceStr = couponPrice.getText().substring(1);
         System.out.println("coupon price str:" + couponPriceStr);
 
+
         float finalPrice = Float.parseFloat(originalPriceStr) - Float.parseFloat(couponPriceStr);
         System.out.println("final Price:" + finalPrice);
         Thread.sleep(3000);
@@ -70,6 +81,10 @@ public class CartPage extends BasePage {
         System.out.println("price after coupon is applied" + priceAfterCouponApplied.getText().replace(",", ""));
 
         return priceAfterCouponApplied.getText().replace(",", "").contains(Float.toString(finalPrice));
+    }
+
+    public String getTextFromCartPage() {
+        return textInEmptyCartPage.getText();
     }
 
 //------------------  product deletion functionality  ----------------------------------------
