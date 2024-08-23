@@ -1,12 +1,10 @@
 package com.automation.pages;
 
-import io.cucumber.java.sl.In;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class HomePage extends BasePage{
 
@@ -30,6 +28,18 @@ public class HomePage extends BasePage{
 
     @FindBy(xpath = "//span[@class='ic-search']")
     WebElement searchButton;
+
+    @FindBy(xpath = "//div[@class='ic-cart ']")
+    WebElement cartIconButton;
+
+    @FindBy(xpath = "//div[@class='ftr-items']/a[@title='Men']")
+    WebElement footerItem;
+
+    @FindBy(xpath = "//span[text()='MEN']")
+    WebElement menMouseHover;
+
+    @FindBy(xpath = "(//div[@class='title']/a/span/strong[text()='CLOTHING'])[1]")
+    WebElement afterMouseHover;
 
 
     public void openWebsite() {
@@ -72,5 +82,25 @@ public class HomePage extends BasePage{
         searchButton.click();
     }
 
+    public void clickOnCartButton() {
+        cartIconButton.click();
+    }
 
+    public void clickOnFooterItem() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0,document.body.scrollHeight);");
+    }
+
+    public String verifyUseronMensPage() {
+        return driver.getCurrentUrl();
+    }
+
+    public void moveCursorToMenWebElement() {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(menMouseHover).perform();
+    }
+
+    public boolean validateTheMouseHoverIsWorking() {
+        return afterMouseHover.isDisplayed();
+    }
 }

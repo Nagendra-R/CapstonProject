@@ -15,9 +15,10 @@ public class HomeStep {
     public void user_open_the_application() {
         homePage.openWebsite();
     }
+
     @Then("validate user on home page")
     public void validate_user_on_home_page() {
-        Assert.assertEquals("https://www.ajio.com/",homePage.verifyUserOnHomePage());
+        Assert.assertEquals("https://www.ajio.com/", homePage.verifyUserOnHomePage());
     }
 
 
@@ -51,7 +52,7 @@ public class HomeStep {
 
     @Then("verify user on ajioluxe page")
     public void verifyUserOnAjioluxePage() {
-        Assert.assertEquals("https://luxe.ajio.com/",homePage.verifyUserOnAjioLuxePage());
+        Assert.assertEquals("https://luxe.ajio.com/", homePage.verifyUserOnAjioLuxePage());
     }
 
 
@@ -59,6 +60,34 @@ public class HomeStep {
     public void userSearchWith(String item) {
         homePage.searchWithItem(item);
     }
+
+
+    @When("user click on the cart button")
+    public void userClickOnTheCartButton() {
+        homePage.clickOnCartButton();
+
+    }
+
+    @When("go to footer and click on the men")
+    public void goToFooterAndClickOnThe() {
+        homePage.clickOnFooterItem();
+    }
+
+    @Then("validate user on mens page")
+    public void validateUserOnMensPage() {
+        Assert.assertEquals("https://www.ajio.com/shop/men",homePage.verifyUseronMensPage());
+    }
+
+    @When("move the cursor to the men web element")
+    public void moveTheCursorToTheMenWebElement() {
+        homePage.moveCursorToMenWebElement();
+    }
+
+    @Then("verify mouse hover is working or not")
+    public void verifyMouseHoverIsWorkingOrNot() {
+        Assert.assertTrue(homePage.validateTheMouseHoverIsWorking());
+    }
+
 
 
 }
