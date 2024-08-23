@@ -29,6 +29,35 @@ Feature: Ecommerce functionality verification
     When user is on the beauty page and clicks grid button
     Then verify number of products displayed in a single row changed
 
+  Scenario: verify every product is of the same brand
+    Given user opens the website
+    And user hovers above a menu in the header section
+    Then hover over the brand menu option
+    And select a particular brand "brand"
+    When user is on the product listing page
+    Then verify every product is of the selected brand only
+
+  Scenario: verify coupons are working
+    Given user opens the website
+    Then user search for a product "search.product" in the search input field
+    When user is on the product listing page
+    Then click on a product
+    And select a size for the product
+    Then add the product to the cart
+    And go to the cart page
+    When user is on the cart page select a coupon and click apply
+    Then verify the selected coupon is applied to the product
+
+  Scenario: verify the delete button inside cart is working
+    Given user opens the website
+    Then user search for a product "search.product" in the search input field
+    When user is on the product listing page
+    Then click on a product
+    And select a size for the product
+    Then add the product to the cart
+    And go to the cart page
+    When user is on the cart page click on the delete button
+    Then verify the product is removed from the cart
 
 
 

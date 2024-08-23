@@ -9,8 +9,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Locale;
 
 public class ProductPage extends BasePage{
+
+    GridViewPage gridViewPage = new GridViewPage();
 
     Actions action = new Actions(driver);
 
@@ -99,6 +102,74 @@ public class ProductPage extends BasePage{
         }
         return finalResult;
     }
+
+//-----------------------------------------------------------------------------------------------
+//-------------------      verifying selected brand only displayed      -------------------------
+
+    @FindBy(xpath = "//a[text()='Brands']")
+    WebElement brandElementToHover;
+
+    String brandToSelect = "//a[text()='%s']";
+
+    String productListingPageName = "//div[@aria-label='%s']";
+
+    String individualBrandName = "//div[@aria-label='%s']";
+
+
+
+    public void headerSectionMenuHovering(){
+
+        action.moveToElement(menElementToHover).perform();
+
+    }
+
+    public void brandMenuHovering(){
+        action.moveToElement(brandElementToHover).perform();
+
+    }
+
+    public void brandSelection(String brand){
+
+        String brandSelectXpathMake = String.format(brandToSelect, brand);
+        driver.findElement(By.xpath(brandSelectXpathMake)).click();
+    }
+
+    public boolean productListingOfBrand() throws InterruptedException {
+        Thread.sleep(3000);
+        gridViewPage.gridViewButton.click();
+        Thread.sleep(3000);
+
+        String productListingPageNameXpath = String.format(productListingPageName, ConfigReader.getConfigValue("brand").toUpperCase(Locale.ROOT));
+        WebElement heading = driver.findElement(By.xpath(productListingPageNameXpath));
+        return heading.isDisplayed();
+    }
+
+    boolean noRepetitionResult;
+    public boolean verifyProductBrand() throws InterruptedException {
+        Thread.sleep(3000);
+        String brandName  = String.format(individualBrandName, ConfigReader.getConfigValue("brand").toUpperCase());
+        List<WebElement> listOfNames = driver.findElements(By.xpath(brandName));
+        int max = 10;
+        if (listOfNames.size() > max) {
+            listOfNames = listOfNames.subList(0, max);
+        }
+        for(WebElement element : listOfNames){
+            if(element.getText().equals(ConfigReader.getConfigValue("brand").toUpperCase())){
+                noRepetitionResult = true;
+            }
+        }
+        return noRepetitionResult;
+    }
+//-----------------------------------------------------------------------------------------
+//------------------------------- coupon verification -------------------------------------
+    @FindBy(xpath = "//div[@aria-label='grid']/div/div[1]")
+    WebElement singleProductSelection;
+
+    public void singleProductClick(){
+        singleProductSelection.click();
+    }
+
+
 
 
 }

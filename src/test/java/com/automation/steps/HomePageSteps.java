@@ -1,6 +1,7 @@
 package com.automation.steps;
 
 import com.automation.pages.HomePage;
+import com.automation.utils.ConfigReader;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -30,5 +31,12 @@ public class HomePageSteps{
     @Then("user must reach the top of the page")
     public void user_must_reach_the_top_of_the_page() {
         Assert.assertTrue(homePage.verifyTopSectionDisplayed());
+    }
+//-------------------------------------------------------------------------------------------
+//--------------------------------- coupon verification -------------------------------------
+
+    @Then("user search for a product {string} in the search input field")
+    public void userSearchForAProductInTheSearchInputField(String product) {
+        homePage.productSearchProcess(ConfigReader.getConfigValue(product));
     }
 }

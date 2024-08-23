@@ -58,10 +58,45 @@ public class ProductPageSteps {
 
     }
 
-
-
 //----------------------------------------------------------------------------------------------------
+//--------------      brand selection verification      -------------------
+
+    @And("user hovers above a menu in the header section")
+    public void userHoversAboveAMenuInTheHeaderSection() {
+
+        productPage.headerSectionMenuHovering();
+    }
 
 
+    @Then("hover over the brand menu option")
+    public void hoverOverTheBrandMenuOption() {
 
+        productPage.brandMenuHovering();
+    }
+
+    @And("select a particular brand {string}")
+    public void selectAParticularBrand(String brand) {
+
+        productPage.brandSelection(ConfigReader.getConfigValue(brand));
+    }
+
+    @When("user is on the product listing page")
+    public void userIsOnTheProductListingPage() throws InterruptedException {
+
+        Assert.assertTrue(productPage.productListingOfBrand());
+    }
+
+    @Then("verify every product is of the selected brand only")
+    public void verifyEveryProductIsOfTheSelectedBrandOnly() throws InterruptedException {
+
+        Assert.assertTrue(productPage.verifyProductBrand());
+    }
+
+//-------------------------------------------------------------------------------------------
+//---------------------------- coupon verification ------------------------------------------
+
+    @Then("click on a product")
+    public void clickOnAProduct() {
+        productPage.singleProductClick();
+    }
 }

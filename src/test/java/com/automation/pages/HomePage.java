@@ -15,11 +15,7 @@ public class HomePage extends BasePage {
 
     @FindBy(xpath = "//aside[@data-testid='react-scroll-up-button']")
     WebElement goToTopBtn;
-    //----------------------------------------------------------------------
 
-
-
-    //------------- Goto Top Arrow Button --------------------------
 
     public void openWebsite() {
         driver.get("https://www.ajio.com/");
@@ -29,17 +25,26 @@ public class HomePage extends BasePage {
         return driver.getCurrentUrl();
     }
 
-    public void gotoBottomSection(){
+    public void gotoBottomSection() {
         followUsText.click();
     }
-    public void clicksOnButton(){
+
+    public void clicksOnButton() {
         goToTopBtn.click();
     }
-    public boolean verifyTopSectionDisplayed(){
+
+    public boolean verifyTopSectionDisplayed() {
         return mainLogo.isDisplayed();
     }
     //-----------------------------------------------------------------
 
+    @FindBy(xpath = "//input[@name='searchVal']")
+    WebElement productSearchField;
+
+    public void productSearchProcess(String product){
+        productSearchField.sendKeys(product);
+        productSearchField.submit();
+    }
 
 
 }
