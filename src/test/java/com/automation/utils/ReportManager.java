@@ -13,11 +13,10 @@ public class ReportManager {
 
     public static void attachScreenshot(){
         scenario.attach(takeScreenshot(), "image/png","test failed");
-
     }
 
     public static byte[] takeScreenshot(){
-        TakesScreenshot ts = (TakesScreenshot) DriverManager.getDriver();
+        TakesScreenshot ts = (TakesScreenshot) DriverManagerWeb.getWebDriver();
         byte[] screenshot = ts.getScreenshotAs(OutputType.BYTES);
         return screenshot;
     }

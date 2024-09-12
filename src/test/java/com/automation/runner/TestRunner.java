@@ -6,11 +6,13 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features ="src/test/resources/features",
+        features ="src/test/resources/features/Both/firstCartIsEmpty.feature",
         glue = "com.automation.steps",
-        plugin = {"html:target/report.html", "json:target/cucumber.json"}
-
+        plugin = {"html:target/report.html", "json:target/cucumber.json"},
+        tags = "@web1"
 )
+
+
 public class TestRunner {
 
 }
