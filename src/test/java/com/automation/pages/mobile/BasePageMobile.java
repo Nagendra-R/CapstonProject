@@ -1,6 +1,6 @@
 package com.automation.pages.mobile;
 
-import com.automation.utils.DriverManagerMobile;
+import com.automation.utils.DriverManager;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Pause;
@@ -22,7 +22,7 @@ public class BasePageMobile {
 
 
     public BasePageMobile() {
-        driver = DriverManagerMobile.getMobileDriver();
+        driver = (AppiumDriver) DriverManager.getDriver();
         PageFactory.initElements(driver, this);
         wait = new WebDriverWait(driver,Duration.ofSeconds(10));
     }
@@ -64,7 +64,7 @@ public class BasePageMobile {
     }
 
     public void scrollOrSwipe(int startX, int startY, int endX, int endY) {
-        PointerInput finger1 = new PointerInput(PointerInput.Kind.TOUCH, "finger1");
+        PointerInput finger1 = new PointerInput(PointerInput.Kind.TOUCH,"finger1");
         Sequence sequence = new Sequence(finger1, 1)
                 .addAction(finger1.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, startY))
                 .addAction(finger1.createPointerDown(PointerInput.MouseButton.LEFT.asArg()))

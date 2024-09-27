@@ -41,7 +41,7 @@ public class ExtentReportManager {
     }
 
     private static String takeScreenshot() throws IOException {
-        TakesScreenshot ts = (TakesScreenshot) DriverManagerWeb.getWebDriver();
+        TakesScreenshot ts = (TakesScreenshot) DriverManager.getDriver();
         File file = ts.getScreenshotAs(OutputType.FILE);
         Random ran = new Random();
         String filePath = "src/test/resources/screenshots" + "/screenshot"+ran.nextInt(1000)+".png";

@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         features ="src/test/resources/features/Both/firstCartIsEmpty.feature",
         glue = "com.automation.steps",
         plugin = {"html:target/report.html", "json:target/cucumber.json"},
-        tags = "@web1"
+        tags = "@web"
 )
 
 
